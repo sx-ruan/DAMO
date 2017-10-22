@@ -5,8 +5,7 @@ numpy, scipy, matplotlib, sklearn, requests.
 
 To execute the DAMO program, please follow the instructions below.
 
-usage: DAMO.py [-h] -p POSITIVE -n NEGATIVE -s SEED [-f FLAG] [-g GENERATION]
-               [-i] [-o OUTPUT] [-v]
+usage: DAMO.py [-h] -p POSITIVE -n NEGATIVE -s SEED [-f FLAG] [-g GENERATION] [-i] [-o OUTPUT] [-v]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -17,13 +16,10 @@ optional arguments:
   -s SEED, --seed SEED  path of the initial position frequency matrix
   -f FLAG, --flag FLAG  prefix of output file names (optional, default: DAMO)
   -g GENERATION, --generation GENERATION
-                        number of optimization iterations (optional, default:
-                        500)
-  -i, --interaction     consider adjacent di-nucleotide interactions
-                        (optional, default: False)
+                        number of optimization iterations (optional, default: 500)
+  -i, --interaction     consider adjacent di-nucleotide interactions (optional, default: False)
   -o OUTPUT, --output OUTPUT
-                        output directory (optional, default: current working
-                        directory)
+                        output directory (optional, default: current working directory)
   -v, --version         show program's version number and exit
 
 
