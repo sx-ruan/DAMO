@@ -1,6 +1,7 @@
 # coding=utf-8
 from helpers import *
 from sklearn import metrics
+import argparse
 
 
 LEARNING_RATES = 1.0, 0.55, 0.1
@@ -24,7 +25,7 @@ class Encoder2(list):
         :param level: int
         :return:
         """
-        self.hash = {}  # fixme: new feature
+        self.hash = {}
 
         self.width = width
         self.encoding = encoding
@@ -223,4 +224,24 @@ def dimo(positive_file, negative_file, pfm_file_name, output_flag, path='.', gen
     np.savetxt(os.path.join(path, output_flag + '_END.pfm'), temp_pwm)
 
 
-__all__ = ['dimo', 'read_fasta', 'get_max_site', 'Encoder2']
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--positive', required=True, help='path of positive sequences (FASTA format)')
+    parser.add_argument('-n', '--negative', required=True, help='path of negative sequences (FASTA format)')
+    parser.add_argument('-s', '--seed', required=True, help='path of the initial position frequency matrix')
+    parser.add_argument('-f', '--flag', default='DAMO',
+                        help='prefix of output file names (optional, default: DAMO)')
+    parser.add_argument('-g', '--generation', type=int, default=500,
+                        help='number of optimization iterations (optional, default: 500)')
+    parser.add_argument('-i', '--interaction', action='store_true',
+                        help='consider adjacent di-nucleotide interactions (optional, default: False)')
+    parser.add_argument('-o', '--output', default=os.getcwd(),
+                        help='output directory (optional, default: current working directory)')
+    parser.add_argument('-v', '--version', action='version', version='1.0.0')
+    args = parser.parse_args()
+
+    dimo(args.positive, args.negative, args.seed, args.flag, args.output, args.generation, int(args.interaction) + 1)
+
+
+if __name__ == '__main__':
+    main()
