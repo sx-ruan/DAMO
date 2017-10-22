@@ -1,0 +1,44 @@
+Discriminative Additive Model Optimization (DAMO)
+
+DAMO is a Python implementation of the Discriminative Motif Optimizer (DiMO) program and extends it to include adjacent di-nucleotide interactions. It requires Python 2.7 and the following Python packages:
+numpy, scipy, matplotlib, sklearn, requests.
+
+To execute the DAMO program, please follow the instructions below.
+
+usage: DAMO.py [-h] -p POSITIVE -n NEGATIVE -s SEED [-f FLAG] [-g GENERATION]
+               [-i] [-o OUTPUT] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p POSITIVE, --positive POSITIVE
+                        path of positive sequences (FASTA format)
+  -n NEGATIVE, --negative NEGATIVE
+                        path of negative sequences (FASTA format)
+  -s SEED, --seed SEED  path of the initial position frequency matrix
+  -f FLAG, --flag FLAG  prefix of output file names (optional, default: DAMO)
+  -g GENERATION, --generation GENERATION
+                        number of optimization iterations (optional, default:
+                        500)
+  -i, --interaction     consider adjacent di-nucleotide interactions
+                        (optional, default: False)
+  -o OUTPUT, --output OUTPUT
+                        output directory (optional, default: current working
+                        directory)
+  -v, --version         show program's version number and exit
+
+
+Note:
+The input format of the initial position frequency matrix: The first line starts with '>' and gives a description of the motif. The next four lines specify the position frequency matrix (in the order of ACGT).
+
+Example:
+> motif name
+A | 0.001 0.001 0.3 0.001 0.001
+C | 0.001 0.001 0.3 0.001 0.001
+G | 0.997 0.997 0.1 0.001 0.001
+T | 0.001 0.001 0.3 0.997 0.997
+
+Author:
+Shuxiang Ruan (sruan@wustl.edu), Washington University in St. Louis
+
+Reference:
+Patel RY, Stormo GD. Discriminative motif optimization based on perceptron training. Bioinformatics (2014)
