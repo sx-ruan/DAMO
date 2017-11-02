@@ -204,7 +204,7 @@ class readProcessSeq(object):
         self.neg_splitted = splitAndGenerateList(self.negative_samples, motif_length)
 
 
-def dimo(positive_file, negative_file, pfm_file_name, output_flag, path='.', generations=500, level=1):
+def damo(positive_file, negative_file, pfm_file_name, output_flag, path='.', generations=500, level=1):
     pfm = load_PPM(pfm_file_name, skipcols=2, skiprows=1)  # type: np.ndarray
     motif_length = len(pfm)
     enc = Encoder2(motif_length, level=level)
@@ -247,7 +247,7 @@ def main():
     parser.add_argument('-v', '--version', action='version', version='1.0.1')
     args = parser.parse_args()
 
-    dimo(args.positive, args.negative, args.seed, args.flag, args.output, args.generation, int(args.interaction) + 1)
+    damo(args.positive, args.negative, args.seed, args.flag, args.output, args.generation, int(args.interaction) + 1)
 
 
 if __name__ == '__main__':
