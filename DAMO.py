@@ -221,7 +221,14 @@ def dimo(positive_file, negative_file, pfm_file_name, output_flag, path='.', gen
         if np.array_equal(old_pwm, temp_pwm):
             break
 
-    np.savetxt(os.path.join(path, output_flag + '_END.pfm'), temp_pwm)
+    with open(os.path.join(path, '%s_END_PWM.txt' % output_flag), 'w') as f:
+        pwm_1, pwm_2 = np.split(temp_pwm, [enc.m[0]])  # type: np.ndarray
+        for label, row in zip(BASES, np.reshape(pwm_1, (enc.npos[0], enc.nlabels[0])).astype(str).T):
+            f.write(label + ': ' + ' '.join(row) + '\n')
+
+        if level == 2:
+            for label, row in zip(Product(BASES, 2), np.reshape(pwm_2, (enc.npos[1], enc.nlabels[1])).astype(str).T):
+                f.write(label + ': ' + ' '.join(row) + '\n')
 
 
 def main():
@@ -230,14 +237,14 @@ def main():
     parser.add_argument('-n', '--negative', required=True, help='path of negative sequences (FASTA format)')
     parser.add_argument('-s', '--seed', required=True, help='path of the initial position frequency matrix')
     parser.add_argument('-f', '--flag', default='DAMO',
-                        help='prefix of output file names (optional, default: DAMO)')
+                        help='prefix of the output filename (optional, default: "DAMO")')
     parser.add_argument('-g', '--generation', type=int, default=500,
                         help='number of optimization iterations (optional, default: 500)')
     parser.add_argument('-i', '--interaction', action='store_true',
                         help='consider adjacent di-nucleotide interactions (optional, default: False)')
     parser.add_argument('-o', '--output', default=os.getcwd(),
                         help='output directory (optional, default: current working directory)')
-    parser.add_argument('-v', '--version', action='version', version='1.0.0')
+    parser.add_argument('-v', '--version', action='version', version='1.0.1')
     args = parser.parse_args()
 
     dimo(args.positive, args.negative, args.seed, args.flag, args.output, args.generation, int(args.interaction) + 1)
