@@ -14,7 +14,7 @@ optional arguments:
   -n NEGATIVE, --negative NEGATIVE
                         path of negative sequences (FASTA format)
   -s SEED, --seed SEED  path of the initial position frequency matrix
-  -f FLAG, --flag FLAG  prefix of output file names (optional, default: DAMO)
+  -f FLAG, --flag FLAG  prefix of the output filename (optional, default: "DAMO")
   -g GENERATION, --generation GENERATION
                         number of optimization iterations (optional, default: 500)
   -i, --interaction     consider adjacent di-nucleotide interactions (optional, default: False)
